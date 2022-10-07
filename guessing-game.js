@@ -16,6 +16,7 @@ function randomInRange(min, max) {
 
 //-------------
 
+
 // const secretNumber = randomInRange(0, 100)
 
 let checkGuess = num => {
@@ -37,7 +38,11 @@ let checkGuess = num => {
 function askGuess(n) {
     rl.question("Enter a guess: ", answer => {
         let num = Number(answer)
-        if (checkGuess(num) === true) {
+        numAttempts--;
+        if (numAttempts === 0) {
+            console.log("You Lose!");
+            rl.close();
+        } else if (checkGuess(num) === true) {
             console.log("You win!")
         } else {
             return askGuess()
@@ -64,9 +69,17 @@ let askRange = () => {
     }
     }
 }
+///-----------
+function askLimit() {
+    rl.question("Enter the number of attempts: ", attempts => {
+        numAttempts = attempts;
+        askRange();
+      })
+}
 
 
-askRange()
+askLimit()
+//askRang()
 // askGuess()
 // ////
 // console.log(checkGuess(01))
